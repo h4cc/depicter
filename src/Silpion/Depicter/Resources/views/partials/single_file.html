@@ -1,0 +1,52 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#file-accordion" href="#file{{ file.id }}">
+                {{ file.path }}
+                <span class="pull-right badge">{{ file.comments|length }} Comments</span>
+            </a>
+        </h4>
+    </div>
+    <div id="file{{ file.id }}" class="panel-collapse collapse">
+        <div class="panel-body">
+
+            <div>
+                <ul style="margin-right: 20px;" class="list-unstyled">
+                    {% for lineNumber, comment in file.comments %}
+                    {% for message in comment %}
+                    <li>
+                        <a class="btn btn-link" href="#file{{ file.id }}line{{lineNumber}}">Line {{lineNumber}}:
+                            {{message.id}}</a>
+                    </li>
+                    {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+
+
+            {% set lastLineNumber = 0 %}
+            {% for lineNumber, line in file.source %}
+
+            {% if lastLineNumber > 0 and lineNumber > lastLineNumber+1 %}
+            <div style="margin: 15px; padding: 0px;">
+                &nbsp;
+            </div>
+            {% endif %}
+            <div id="file{{ file.id }}line{{lineNumber}}" class="{{ cycle(['odd', 'even'], loop.index) }}"
+                 style="margin: 0px; padding: 0px;">
+                <pre style="display: inline; margin: 0px; padding: 0px;">{{line | raw}}</pre>
+
+                {% if lineNumber in file.comments|keys %}
+                {% for message in attribute(file.comments, lineNumber) %}
+                <div class="center-block panel panel-default panel-danger">
+                    <div class="panel-heading">{{message.tool}}: {{message.id}}</div>
+                    <div class="panel-body">{{ message.message }}</div>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+            {% set lastLineNumber = lineNumber %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
