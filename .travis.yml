@@ -14,4 +14,3 @@ before_script:
 script:
   - php bin/depicter
   - php depicter.phar
-
