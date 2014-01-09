@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/h4cc/depicter.png?branch=master)](https://travis-ci.org/h4cc/depicter)
+
 # depicter
 
 A aggregating PHP continuous integration tool.
