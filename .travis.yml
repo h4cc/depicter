@@ -6,9 +6,9 @@ php:
   - 5.5
 
 before_script:
-  - curl --retry 3 -s http://getcomposer.org/installer | php
+  - curl -Ss http://getcomposer.org/installer | php
   - php composer.phar install
-  - curl --verbose --retry 3 -s http://box-project.org/installer.php | php
+  - curl -Ss http://box-project.org/installer.php | php
   - php box.phar build
 
 script:
