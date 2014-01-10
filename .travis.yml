@@ -8,8 +8,8 @@ php:
 before_script:
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install
-  - curl --verbose http://box-project.org/installer.php
-  - curl --verbose http://box-project.org/installer.php | php
+  - curl --retry 3 --location http://box-project.org/installer.php
+  - curl --retry 3 --location http://box-project.org/installer.php | php
   - php box.phar build
 
 script:
