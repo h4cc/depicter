@@ -8,7 +8,7 @@ php:
 before_script:
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install
-  - curl -s http://box-project.org/installer.php | php
+  - curl --verbose http://box-project.org/installer.php | php
   - php box.phar build
 
 script:
